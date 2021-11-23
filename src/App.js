@@ -1,10 +1,22 @@
 import "./App.css";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Home from "./Pages/Home/Home";
+import Authentcation from "./Pages/Authentcation/Authentcation";
+import Category from "./Pages/Category/Category";
+import CategoryProducts from "./Pages/CategoryProducts/CategoryProducts";
+import Checkout from "./Pages/Checkout/Checkout";
 
 function App() {
   return (
-    <div className="App">
-      <h1>MY REACT APP</h1>
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/" component={Home} exact />
+        <Route path="/auth" component={Authentcation} />
+        <Route path="/category" component={Category} />
+        <Route path="/category-products" component={CategoryProducts} />
+        <Route path="/checkout" component={Checkout} />
+      </Switch>
+    </Router>
   );
 }
 
