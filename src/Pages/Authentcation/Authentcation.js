@@ -1,4 +1,5 @@
 import React from "react";
+import GoogleSignin from "../../Components/GoogleSignin/GoogleSignin";
 import SigninForm from "../../Components/SigninForm/SigninForm";
 import Signout from "../../Components/Signout/Signout";
 import SignupForm from "../../Components/SignupForm/SignupForm";
@@ -9,7 +10,8 @@ const Authentcation = () => {
       <h1>Authentcation Page</h1>
       <SignupForm />
       <SigninForm />
-      <Signout/>
+      <GoogleSignin />
+      <Signout />
     </div>
   );
 };

@@ -37,7 +37,7 @@ const SigninForm = ({ signin }) => {
   );
 };
 
-export const actions = {
+const actions = {
   signin,
 };
 

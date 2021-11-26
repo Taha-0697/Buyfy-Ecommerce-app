@@ -1,4 +1,10 @@
-import { auth, firestore, serverTimestamp } from "../../Firebase/Firebase";
+import {
+  auth,
+  firestore,
+  googleAuthProvider,
+  serverTimestamp,
+} from "../../Firebase/Firebase";
+import firebase from "../../Firebase/Firebase";
 import { REMOVE_USER, SET_USER } from "./authConstants";
 
 // export const setuser = (user) => async (dispatch) => {
@@ -22,9 +28,14 @@ export const setUser = (user) => ({
   },
 });
 
+// remmove user
+export const removeUser = () => ({
+  type: REMOVE_USER,
+});
+
 export const signup =
   ({ email, password, fullname }) =>
-  async (dispatch) => {
+  async () => {
     try {
       // create user on firebase auth section
       const user = await auth.createUserWithEmailAndPassword(email, password);
@@ -43,17 +54,6 @@ export const signup =
       };
       console.log(userInfo);
       await firestore.collection("users").doc(uid).set(userInfo);
-
-      // setting up redux state
-      const userDataForState = {
-        fullname,
-        email,
-        password,
-        uid,
-      };
-
-      // if 2 functions are in same file you have to call function in  dispatch()
-      dispatch(setUser(userDataForState));
     } catch (error) {
       console.log(error);
     }
@@ -61,47 +61,102 @@ export const signup =
 
 export const signin =
   ({ email, password }) =>
-  async (dispatch) => {
+  async () => {
     try {
       // signin user on firebase auth section
       const user = await auth.signInWithEmailAndPassword(email, password);
       console.log(user);
-
-      // fetch user data from firestore
-      const {
-        user: { uid },
-      } = user;
-      const userData = await firestore.collection("users").doc(uid).get();
-      console.log(userData.data());
-
-      const { fullname } = userData.data();
-      // setting up redux state
-      const userDataForState = {
-        fullname,
-        email,
-        password,
-        uid,
-      };
-
-      // if 2 functions are in same file you have to call function in  dispatch()
-      dispatch(setUser(userDataForState));
     } catch (error) {
       console.log(error);
     }
   };
 
-export const signout = () => async (dispatch) => {
+export const signout = () => async () => {
   try {
     // signout user from firebase auth
     await auth.signOut();
-
-    // set auth to null
-    dispatch(removeUser());
   } catch (error) {
     console.log(error);
   }
 };
 
-export const removeUser = () => ({
-  type: REMOVE_USER,
-});
+export const googleSignin = () => async (dispatch) => {
+  try {
+    // signin user in firebase auth (google)
+    const googleUser = await auth.signInWithPopup(googleAuthProvider);
+    console.log(googleUser);
+
+    const {
+      user: { displayName, email, uid },
+      additionalUserInfo: { isNewUser },
+    } = googleUser;
+
+    // if new user ->  add info to fire store
+    if (isNewUser) {
+      //saving the data in firebase
+      const userInfo = {
+        fullname: displayName,
+        email,
+        createdAt: serverTimestamp(),
+      };
+      console.log(userInfo);
+      await firestore.collection("users").doc(uid).set(userInfo);
+    }
+
+    // setting up redux state or set user data to state
+    const userDataForState = {
+      fullname: displayName,
+      email,
+      uid,
+    };
+
+    // if 2 functions are in same file you have to call function in  dispatch()
+    dispatch(setUser(userDataForState));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+//app auth statte (centeralized auth state manager)
+export const FirebaseAuthListener = () => async (dispatch) => {
+  try {
+    // firebase auth listener
+    firebase.auth().onAuthStateChanged(async (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        // ...
+        console.log("%cUser SignIn", "font-weight:bolder;color:green", user);
+        const { uid } = user;
+        const query = await firestore.collection("users").doc(uid).get();
+        const userData = query.data();
+        // console.log(userData);
+
+        // setting up redux state
+        const { fullname, email, password } = userData;
+        const userDataForState = {
+          fullname,
+          email,
+          password,
+          uid,
+        };
+
+        // if 2 functions are in same file you have to call function in  dispatch()
+        dispatch(setUser(userDataForState));
+        console.log(
+          "%cUser Data: ",
+          "font-weight:bolder;color:green",
+          userDataForState
+        );
+      } else {
+        // User is signed out
+        // ...
+        console.log("%cNo User", "font-weight:bolder;color:green");
+        // set auth to null
+        dispatch(removeUser());
+      }
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
