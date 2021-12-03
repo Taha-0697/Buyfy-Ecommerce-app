@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./Test.css"
 import { connect } from "react-redux";
 import { uploadProduct } from "../Redux/products/productsActions";
 

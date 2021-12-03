@@ -9,27 +9,31 @@ import { useEffect } from "react";
 import { FirebaseAuthListener } from "./Redux/auth/authActions";
 import { connect } from "react-redux";
 import Test from "./Test/Test";
+import Navbar from "./Components/Navbar/Navbar";
 
 function App({ FirebaseAuthListener }) {
-  useEffect(() => {
-    //CDM
-    FirebaseAuthListener();
-  }, []);
-  return (
-    <Router>
-      <Switch>
-        <Route path="/" component={Home} exact />
-        <Route path="/auth" component={Authentcation} />
-        <Route path="/category" component={Category} />
-        <Route path="/category-products" component={CategoryProducts} />
-        <Route path="/checkout" component={Checkout} />
-        <Route path="/test" component={Test} />
-      </Switch>
-    </Router>
-  );
+    useEffect(() => {
+        //CDM
+        FirebaseAuthListener();
+    }, []);
+    return (
+        <div>
+            <Router>
+            <Navbar/>
+                <Switch>
+                    <Route path="/" component={Home} exact />
+                    <Route path="/auth" component={Authentcation} />
+                    <Route path="/category" component={Category} />
+                    <Route path="/category-products" component={CategoryProducts} />
+                    <Route path="/checkout" component={Checkout} />
+                    <Route path="/test" component={Test} />
+                </Switch>
+            </Router>
+        </div>
+    );
 }
 const actions = {
-  FirebaseAuthListener,
+    FirebaseAuthListener,
 };
 
 export default connect(null, actions)(App);

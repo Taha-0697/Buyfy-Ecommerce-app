@@ -1,0 +1,30 @@
+.navbar{
+    width: 100vw;
+    height: 13vh;
+    background-color: lightgrey;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+}
+
+.nav-items-container{
+    display: flex;
+    align-items: center;
+}
+
+.nav-items{
+    padding: 0 30px;
+    cursor: pointer;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    padding: 0 50px;
+    box-sizing: border-box;
+}
+
+/* img{
+    height: 100px;
+    width:150px;
+    padding:5px;
+} */

@@ -21,6 +21,7 @@ const SignupForm = ({ signup }) => {
   };
   return (
     <div>
+    <h3>Sign-Up</h3>
       <form onSubmit={handleFormSubimt}>
         <input
           value={fullname}

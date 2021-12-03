@@ -1,6 +1,8 @@
 import { firestore, serverTimestamp, storage } from "../../Firebase/Firebase";
 import { v4 as uuid } from "uuid";
 
+
+// ADMIN SIDE STUFF 
 export const uploadProduct = (productObj) => async () => {
   try {
     //     console.log(productObj);
@@ -55,3 +57,24 @@ export const uploadProduct = (productObj) => async () => {
     console.log(error);
   }
 };
+
+
+// Product SIDE STUFF
+export const fetchProducts = () => async (dispatch) => {
+try {
+  const query = await firestore.collection("products").get();
+  const products =[];
+  query.docs.forEach((doc) => {
+  products.push(doc.data())
+  })
+  console.log(products);
+
+  dispatch({
+    type: "SET_PRODUCTS",
+    payload: products,
+  })
+
+} catch (error) {
+  console.log(error)
+}
+}

@@ -5,6 +5,7 @@ import { googleSignin } from "../../Redux/auth/authActions";
 const GoogleSignin = ({ googleSignin }) => {
   return (
     <div>
+    <h3>Sign-In With Google</h3>
       <button onClick={googleSignin}>Sign-in with Google</button>
     </div>
   );

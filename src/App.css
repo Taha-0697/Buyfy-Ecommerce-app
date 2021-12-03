@@ -1,6 +1,14 @@
-form {
-  width: fit-content;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
+*{
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+h1{
+  text-align: center;
+}
+
+a{
+  color: inherit;
+  text-decoration: none !important;
 }
