@@ -28,14 +28,14 @@ export const catagorizedProducts = (productsArr) => {
     
   
     // 2- loop through products
-    console.log("%cProduct Category Exist or Not:","color:green;font-weight:bolder")
+    // console.log("%cProduct Category Exist or Not:","color:green;font-weight:bolder")
     for(const product of productsArr){
       categoryName = product.category;
        // console.log(categoryName);
   
       // 3- Loop through categoriesArr / check if category exist in categoriesArr
       isCategoryExist= categoriesArr.some((categoryObj) => categoryObj.category === categoryName)
-      console.log("%cIsCategoryExist:","color:green;font-weight:bolder",isCategoryExist)
+    //   console.log("%cIsCategoryExist:","color:green;font-weight:bolder",isCategoryExist)
       
       // If Category Exists
       if(isCategoryExist){

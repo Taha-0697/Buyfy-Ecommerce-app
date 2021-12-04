@@ -1,6 +1,7 @@
 import { firestore, serverTimestamp, storage } from "../../Firebase/Firebase";
 import { v4 as uuid } from "uuid";
 import {SET_PRODUCTS} from "./productsConstants";
+import { catagorizedProducts } from "../../Utility/products";
 // import { catagorizedProducts } from "../../Utility/products";
 
 
@@ -63,8 +64,6 @@ export const uploadProduct = (productObj) => async () => {
 
 // Product SIDE STUFF
 
-
-
 export const fetchProducts = () => async (dispatch) => {
 try {
   const query = await firestore.collection("products").get();
@@ -73,8 +72,8 @@ try {
   products.push(doc.data())
   })
 console.log("%cProducts Array: \n", "font-weight:bolder;color:green", products);
-//  const category = catagorizedProducts(products);
-//  console.log(category);
+  //  var category = catagorizedProducts(products);
+  //   console.log(category);
 
   dispatch({
     type: SET_PRODUCTS,

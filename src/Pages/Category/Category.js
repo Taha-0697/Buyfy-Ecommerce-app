@@ -1,10 +1,11 @@
 import React,{useEffect} from "react";
 import { connect } from 'react-redux';
+import CategoryList from "../../Components/CategoryList/CategoryList";
 import { fetchProducts } from '../../Redux/products/productsActions';
 import { catagorizedProducts } from "../../Utility/products";
 
 const Category = ({fetchProducts , categories}) => {
-  console.log(categories)
+  console.log("Category",categories)
   useEffect(() => {
   //CDM
   fetchProducts() 
@@ -12,17 +13,17 @@ const Category = ({fetchProducts , categories}) => {
   
   return (
     <div>
-      <h1>Category Page</h1>
+      <CategoryList/>
     </div>
   );
 };
 
-const actions = {
+var actions = {
   fetchProducts,
 }
 
-const mapState = (state) =>({
-  categories: catagorizedProducts(state.products),
+var mapState = (state) =>({
+  categories: catagorizedProducts(state.product),
 })
 
 export default connect(mapState,actions)(Category);
