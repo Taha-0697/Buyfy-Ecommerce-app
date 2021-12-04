@@ -100,7 +100,7 @@ const catagorizedProducts = (productsArr) => {
       categoriesArr= categoriesArr.map((categoryObj) => {
         if(categoryObj.category === categoryName){
           categoryObj.products.push(product)
-        console.log(categoryObj)
+       
         }
       })
     }
