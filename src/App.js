@@ -15,7 +15,7 @@ function App({ FirebaseAuthListener }) {
     useEffect(() => {
         //CDM
         FirebaseAuthListener();
-    }, []);
+    }, [+FirebaseAuthListener]);
     return (
         <div>
             <Router>
@@ -24,7 +24,7 @@ function App({ FirebaseAuthListener }) {
                     <Route path="/" component={Home} exact />
                     <Route path="/auth" component={Authentcation} />
                     <Route path="/category" component={Category} />
-                    <Route path="/category-products" component={CategoryProducts} />
+                    <Route path="/category-products/:category" component={CategoryProducts} />
                     <Route path="/checkout" component={Checkout} />
                     <Route path="/test" component={Test} />
                 </Switch>

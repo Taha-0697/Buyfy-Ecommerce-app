@@ -1,8 +1,8 @@
 import React,{useEffect} from 'react'
-import CategoryListItems from '../CategoryListItems/CategoryListItems'
 import { connect } from 'react-redux';
 import { fetchProducts } from '../../Redux/products/productsActions';
 import { catagorizedProducts } from "../../Utility/products";
+import CatergoryListitems from "../CategoryListItems/CategoryListItems"
 
 
 const CategoryList = ({fetchProducts,categories}) => {
@@ -10,14 +10,12 @@ const CategoryList = ({fetchProducts,categories}) => {
     useEffect(() => {
     //CDM
     fetchProducts() 
-    }, [fetchProducts])
+    },[])
     
     return (
         <div>
             <h1>Category List</h1>
-            <CategoryListItems/>
-            <CategoryListItems/>
-            <CategoryListItems/>
+       {categories.map((cat)=> <CatergoryListitems  key={cat.category} {...cat} /> )}
 
         </div>
     )
