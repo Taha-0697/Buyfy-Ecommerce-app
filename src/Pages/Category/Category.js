@@ -4,12 +4,12 @@ import CategoryList from "../../Components/CategoryList/CategoryList";
 import { fetchProducts } from '../../Redux/products/productsActions';
 import { catagorizedProducts } from "../../Utility/products";
 
-const Category = ({fetchProducts , categories}) => {
-  console.log("Category",categories)
-  useEffect(() => {
-  //CDM
-  fetchProducts() 
-  }, [fetchProducts])
+const Category = () => {
+  // console.log("Category",categories)
+  // useEffect(() => {
+  // //CDM
+  // fetchProducts() 
+  // }, [fetchProducts])
   
   return (
     <div>
