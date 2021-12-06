@@ -1,8 +1,6 @@
 import { firestore, serverTimestamp, storage } from "../../Firebase/Firebase";
 import { v4 as uuid } from "uuid";
 import { SET_PRODUCTS } from "./productsConstants";
-import { catagorizedProducts } from "../../Utility/products";
-// import { catagorizedProducts } from "../../Utility/products";
 
 // ADMIN SIDE STUFF
 export const uploadProduct = (productObj) => async () => {
