@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import CategoryListItems from '../CategoryListItems/CategoryListItems'
 import { connect } from 'react-redux';
 import { fetchProducts } from '../../Redux/products/productsActions';
