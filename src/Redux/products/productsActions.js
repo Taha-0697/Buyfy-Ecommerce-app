@@ -1,8 +1,6 @@
 import { firestore, serverTimestamp, storage } from "../../Firebase/Firebase";
 import { v4 as uuid } from "uuid";
-import { SET_PRODUCTS } from "./productsConstants";
-import { catagorizedProducts } from "../../Utility/products";
-// import { catagorizedProducts } from "../../Utility/products";
+import { CLEAR_PRODUCT, SET_PRODUCTS } from "./productsConstants";
 
 // ADMIN SIDE STUFF
 export const uploadProduct = (productObj) => async () => {
@@ -12,7 +10,7 @@ export const uploadProduct = (productObj) => async () => {
         // 1- send file to storage and get download URl
         const uploadImageRef = storage.child(`products/img-${uuid()}`);
         const filelistener = uploadImageRef.put(productObj.coverPhoto);
-
+ 
         // fileListener.on(Takes 4 arguments)
 
         // fileListener.on(
@@ -101,4 +99,15 @@ export const fetchCategories = (category)=> async (dispatch)=>{
   } catch (error) {
     console.log(error)
   }
+}
+
+
+export const clearProducts = () => async (dispatch)=> {
+try {
+    dispatch({
+        type:CLEAR_PRODUCT
+    })
+} catch (error) {
+    console.log(error)
+}
 }

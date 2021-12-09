@@ -1,21 +1,24 @@
 import React,{useEffect} from "react";
 import { connect } from "react-redux";
 import ProductCard from "../../Components/ProductCard/ProductCard";
-import {fetchCategories} from "../../Redux/products/productsActions"
+import {fetchCategories,clearProducts} from "../../Redux/products/productsActions"
 
 const CategoryProducts = ({
     match: {
         params: { category },
-    },fetchCategories,products
+    },fetchCategories,products,clearProducts
 }) => {
     //console.log(products);
 
     useEffect(() => {
       // CDM 
       fetchCategories(category)
+      return () => {
+          clearProducts()
+      }
     }, [])
 
-    console.log(products)
+   console.log("Products .........",products)
 
     return (
         <div>
@@ -26,7 +29,8 @@ const CategoryProducts = ({
 };
 
 const actions = {
-  fetchCategories
+  fetchCategories,
+  clearProducts
 }
 
  const mapState = (state) => ({
