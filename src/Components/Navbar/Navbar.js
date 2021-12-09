@@ -10,7 +10,7 @@ const Navbar = () => {
                 <Link to="/">
                     {/* <img src={logo} alt="" /> */}
 
-                    <h1>Insert a logo here</h1>
+                    <h1>Logo</h1>
                 </Link>
             </div>
             <div className="nav-items-container">

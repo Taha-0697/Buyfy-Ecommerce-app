@@ -1,11 +1,25 @@
-import React from 'react'
+import React from "react";
+import { Link } from "react-router-dom";
+import ProductCard from "../ProductCard/ProductCard";
 
-const CategoryListItems = () => {
+const CategoryListItems = ({ category, products }) => {
+    console.log(category);
+    console.log(products);
     return (
         <div>
-            <h1>Category List Item</h1>
-        </div>
-    )
-}
+            <h2>{category}</h2>
+            <div>
+                {products.map((product) => (
+                    <ProductCard key={product.title} {...product} />
+                ))}
 
-export default CategoryListItems
+                <Link to={`/category-products/${category}`}>
+                    <button>View More</button>
+                </Link>
+            </div>
+            <br />
+        </div>
+    );
+};
+
+export default CategoryListItems;
