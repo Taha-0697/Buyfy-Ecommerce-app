@@ -64,7 +64,7 @@ export const fetchProducts = () => async (dispatch) => {
         const query = await firestore.collection("products").get();
         const products = [];
         query.docs.forEach((doc) => {
-            products.push(doc.data());
+            products.push({...doc.data(),id: doc.id});
         });
         console.log("%cProducts Array: \n", "font-weight:bolder;color:green", products);
         //  var category = catagorizedProducts(products);
@@ -86,7 +86,7 @@ export const fetchCategories = (category)=> async (dispatch)=>{
         const query = await firestore.collection("products").where("category","==",category).get();
         const products = [];
         query.docs.forEach((doc) => {
-            products.push(doc.data());
+            products.push({...doc.data(),id:doc.id});
         });
         console.log("%cProducts Array: \n", "font-weight:bolder;color:green", products);
         dispatch({
