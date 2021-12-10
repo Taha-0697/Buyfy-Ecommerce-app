@@ -2,6 +2,7 @@ import React,{useEffect} from "react";
 import { connect } from "react-redux";
 import ProductCard from "../../Components/ProductCard/ProductCard";
 import {fetchCategories,clearProducts} from "../../Redux/products/productsActions"
+import Testing from "../../Test/Testing";
 
 const CategoryProducts = ({
     match: {
@@ -18,6 +19,7 @@ const CategoryProducts = ({
       }
     }, [])
 
+   
    console.log("Products .........",products)
 
     return (

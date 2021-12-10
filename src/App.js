@@ -10,12 +10,13 @@ import { FirebaseAuthListener } from "./Redux/auth/authActions";
 import { connect } from "react-redux";
 import Test from "./Test/Test";
 import Navbar from "./Components/Navbar/Navbar";
+import Testing from './Test/Testing';
 
 function App({ FirebaseAuthListener }) {
     useEffect(() => {
         //CDM
         FirebaseAuthListener();
-    }, [+FirebaseAuthListener]);
+    }, [FirebaseAuthListener]);
     return (
         <div>
             <Router>
@@ -27,6 +28,7 @@ function App({ FirebaseAuthListener }) {
                     <Route path="/category-products/:category" component={CategoryProducts} />
                     <Route path="/checkout" component={Checkout} />
                     <Route path="/test" component={Test} />
+                    <Route path="/testing" component={Testing} />
                 </Switch>
             </Router>
         </div>

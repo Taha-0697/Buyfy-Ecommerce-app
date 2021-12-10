@@ -83,7 +83,7 @@ export const removeProductFromcart = (existingProducts, newProductId) => {
     var existProducts = existingProducts.find((existingProduct) => existingProduct.id === newProductId);
     // console.log(existingProducts);
     if (existProducts) {
-        if (existProducts.quantity >= 0) {
+        if (existProducts.quantity > 0) {
             return existingProducts.map((existProduct) => {
                 if (existProduct.id === newProductId) {
                     return {
@@ -97,7 +97,14 @@ export const removeProductFromcart = (existingProducts, newProductId) => {
         } else {
             return existingProducts.filter((existProduct) => existProduct.id !== newProductId);
         }
-    } else{
-      return existingProducts
+    } else {
+        return existingProducts;
+    }
+};
+
+export const deleteProductFromCart = (existingProducts, newProductId) => {
+    var existProducts = existingProducts.find((existingProduct) => existingProduct.id === newProductId);
+    if (existProducts) {
+        return existingProducts.filter((existProduct) => existProduct.id !== newProductId);
     }
 };

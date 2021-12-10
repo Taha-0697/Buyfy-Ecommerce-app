@@ -1,6 +1,5 @@
 import React from "react";
 import "./Navbar.css";
-import logo from "../../images/React.jpeg"
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
@@ -23,6 +22,12 @@ const Navbar = () => {
                 <div className="nav-items">
                     <Link to="auth">
                         <h2>Auth</h2>
+                    </Link>
+                </div>
+                
+                <div className="nav-items">
+                    <Link to="testing">
+                        <h2>Cart Test</h2>
                     </Link>
                 </div>
             </div>
